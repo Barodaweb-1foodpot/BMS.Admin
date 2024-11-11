@@ -305,7 +305,7 @@ const ProductMaster = () => {
             minWidth: "150px",
         },
         {
-            name: "Product Code",
+            name: "Product Code / Identification",
             selector: (row) => row.productCode || "-",
             sortable: true,
             sortField: "productCode",
@@ -442,7 +442,7 @@ const ProductMaster = () => {
                             {isSubmit && <p className="text-danger">{formErrors.productName}</p>}
                         </div>
                         <Label>
-                            Product Code
+                            Product Code / Identification
                         </Label>
                         <div className="form-floating mb-3">
 
@@ -557,7 +557,7 @@ const ProductMaster = () => {
                             {isSubmit && <p className="text-danger">{formErrors.productName}</p>}
                         </div>
                         <Label>
-                            Product Code
+                            Product Code / Identification
                         </Label>
                         <div className="form-floating mb-3">
 

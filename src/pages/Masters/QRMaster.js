@@ -47,6 +47,7 @@ const initialState = {
     licenceNo: "G/25/990",
     IsActive: true
 };
+let value = 0
 
 const QRMaster = () => {
     const [values, setValues] = useState(initialState);
@@ -655,7 +656,7 @@ const QRMaster = () => {
                             {isSubmit && <p className="text-danger">{formErrors.nameOfAPI}</p>}
                         </div>
                         <Label>
-                            Container Code <span className="text-danger">*</span>
+                            Container Code (Drum Number)<span className="text-danger">*</span>
                         </Label>
                         <div className="form-floating mb-3">
                             <Input
@@ -714,7 +715,7 @@ const QRMaster = () => {
                                 </Label>
                                 <div className="form-floating mb-3">
                                     <Input
-                                        type="date"
+                                        type="text"
 
                                         className="p-2 h-100  form-control"
                                         name="DOM"
@@ -730,7 +731,7 @@ const QRMaster = () => {
                                 </Label>
                                 <div className="form-floating mb-3">
                                     <Input
-                                        type="date"
+                                        type="text"
 
                                         className="p-2 h-100  form-control"
                                         name="DOE"
@@ -751,22 +752,7 @@ const QRMaster = () => {
 
 
                         <Row>
-                            <Col>
-                                <Label>
-                                    Gross Weight (GW) <span className="text-danger">*</span>
-                                </Label>
-                                <div className="form-floating mb-3">
-                                    <Input
-                                        type="text"
-
-                                        className="p-2 h-100  form-control"
-                                        name="GW"
-                                        value={GW}
-                                        onChange={handleChange}
-                                    />
-                                    {isSubmit && <p className="text-danger">{formErrors.GW}</p>}
-                                </div>
-                            </Col>
+                            
                             <Col>
                                 <Label>
                                     Tare Weight (TW) <span className="text-danger">*</span>
@@ -797,6 +783,21 @@ const QRMaster = () => {
                                         onChange={handleChange}
                                     />
                                     {isSubmit && <p className="text-danger">{formErrors.NW}</p>}
+                                </div>
+                            </Col>
+                            <Col>
+                                <Label>
+                                    Gross Weight (GW) <span className="text-danger">*</span>
+                                </Label>
+                                <div className="form-floating mb-3">
+                                    <Input
+                                        type="text"
+                                        className="p-2 h-100  form-control"
+                                        name="GW"
+                                        value={GW}
+                                        onChange={handleChange}
+                                    />
+                                    {isSubmit && <p className="text-danger">{formErrors.GW}</p>}
                                 </div>
                             </Col>
                         </Row>
@@ -908,7 +909,7 @@ const QRMaster = () => {
                             {isSubmit && <p className="text-danger">{formErrors.nameOfAPI}</p>}
                         </div>
                         <Label>
-                            Container Code <span className="text-danger">*</span>
+                            Container Code (Drum Number)<span className="text-danger">*</span>
                         </Label>
                         <div className="form-floating mb-3">
                             <Input
@@ -968,7 +969,7 @@ const QRMaster = () => {
                                 <div className="form-floating mb-3">
 
                                     <Input
-                                        type="date"
+                                        type="text"
 
                                         className="p-2 h-100  form-control"
                                         name="DOM"
@@ -985,7 +986,7 @@ const QRMaster = () => {
                                 </Label>
                                 <div className="form-floating mb-3">
                                     <Input
-                                        type="date"
+                                        type="text"
 
                                         className="p-2 h-100  form-control"
                                         name="DOE"
