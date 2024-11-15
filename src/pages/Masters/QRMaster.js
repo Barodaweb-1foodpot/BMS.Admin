@@ -131,26 +131,26 @@ const QRMaster = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-    
+
         if (name === "TW") {
             const tareWeight = parseFloat(value);
             const netWeight = parseFloat(values.NW) || 0;
-            const total = parseFloat((netWeight + tareWeight).toFixed(4));
-    
+            const total = parseFloat((netWeight + tareWeight).toFixed(3));
+
             setValues((prevValues) => ({
                 ...prevValues,
-                TW: tareWeight, 
-                GW: total       
+                TW: tareWeight,
+                GW: total
             }));
         } else if (name === "NW") {
             const tareWeight = parseFloat(values.TW) || 0;
             const netWeight = parseFloat(value);
-            const total = parseFloat((tareWeight + netWeight).toFixed(4));
-    
+            const total = parseFloat((tareWeight + netWeight).toFixed(3));
+
             setValues((prevValues) => ({
                 ...prevValues,
-                NW: netWeight, 
-                GW: total      
+                NW: netWeight,
+                GW: total
             }));
         } else {
             setValues((prevValues) => ({
@@ -159,7 +159,7 @@ const QRMaster = () => {
             }));
         }
     };
-    
+
 
 
     const handleCheck = (e) => {
@@ -179,6 +179,9 @@ const QRMaster = () => {
         let errors = validate(values);
         setFormErrors(errors);
         setIsSubmit(true);
+        values.TW = parseFloat(values.TW).toFixed(3)
+        values.NW = parseFloat(values.NW).toFixed(3)
+        values.GW = parseFloat(values.GW).toFixed(3)
 
         if (Object.keys(errors).length === 0) {
             createQRMaster(values)
@@ -225,7 +228,9 @@ const QRMaster = () => {
         let erros = validate(values);
         setFormErrors(erros);
         setIsSubmit(true);
-
+        values.TW = parseFloat(values.TW).toFixed(3)
+        values.NW = parseFloat(values.NW).toFixed(3)
+        values.GW = parseFloat(values.GW).toFixed(3)
         if (Object.keys(erros).length === 0) {
             updateQRMaster(_id, values)
                 .then((res) => {
@@ -426,15 +431,15 @@ const QRMaster = () => {
             const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/downloadfile`, { qrId: _id });
             console.log(res)
             if (res.isOk) {
-                const fileUrl = `${process.env.REACT_APP_API_URL}/uploads/BMI/${res.filename}`;
-                window.open(fileUrl, "_blank");
-                // toast.success(res.message);
-                // await downloadFile(`${process.env.REACT_APP_API_URL}/uploads/BMI/${res.filename}`);
+                // const fileUrl = `${process.env.REACT_APP_API_URL}/uploads/BMI/${res.filename}`;
+                // window.open(fileUrl, "_blank");
+                toast.success(res.message);
+                await downloadFile(`${process.env.REACT_APP_API_URL}/uploads/BMI/${res.filename}`);
 
                 const data = { fileName: res.filename };
                 const dataQR = { fileName: res.qrCodeFilename };
                 await deleteFile(data);
-                await deleteFile(dataQR);
+                // await deleteFile(dataQR);
             } else {
                 toast.error(res.data.message);
             }
@@ -546,8 +551,8 @@ const QRMaster = () => {
                                     data-bs-target="#showModal"
                                     onClick={() => handlePrintClick(row._id)}
                                 >
-                                   {printingId === row._id && loading2 ? "Printing.." : "Print"}
-                               
+                                    {printingId === row._id && loading2 ? "Printing.." : "Print"}
+
                                 </button>
                             </div>
                         </div>
@@ -889,7 +894,7 @@ const QRMaster = () => {
                                 className="p-2 h-100  form-control"
                                 onChange={handleChange}
                             >
-                                {/* <option>Please Select</option> */}
+                                <option>Please Select</option>
                                 {productData.map((c) => {
                                     return (
                                         <React.Fragment key={c._id}>
@@ -904,7 +909,7 @@ const QRMaster = () => {
                         </div>
 
                         <Label>
-                            Brand Name <span className="text-danger">*</span>
+                            Brand Name
                         </Label>
                         <div className="form-floating mb-3">
                             <Input
@@ -914,7 +919,6 @@ const QRMaster = () => {
                                 value={brandName}
                                 onChange={handleChange}
                             />
-                            {isSubmit && <p className="text-danger">{formErrors.brandName}</p>}
                         </div>
                         <Label>
                             Licence No.
@@ -1003,7 +1007,6 @@ const QRMaster = () => {
                                     Date of Manufacture (DOM) <span className="text-danger">*</span>
                                 </Label>
                                 <div className="form-floating mb-3">
-
                                     <Input
                                         type="text"
 
@@ -1011,7 +1014,6 @@ const QRMaster = () => {
                                         name="DOM"
                                         value={DOM}
                                         onChange={handleChange}
-                                    // min={moment().format("YYYY-MM-DD")}
                                     />
                                     {isSubmit && <p className="text-danger">{formErrors.DOM}</p>}
                                 </div>
@@ -1033,16 +1035,25 @@ const QRMaster = () => {
                                 </div>
                             </Col>
                         </Row>
+
+
+
+
+
+
+
+
+
                         <Row>
-                            
+
                             <Col>
                                 <Label>
                                     Tare Weight (TW) <span className="text-danger">*</span>
                                 </Label>
                                 <div className="form-floating mb-3">
                                     <Input
-                                        type="text"
-
+                                        type="number"
+                                        onWheel={(e) => e.target.blur()}
                                         className="p-2 h-100  form-control"
                                         name="TW"
                                         value={TW}
@@ -1057,8 +1068,8 @@ const QRMaster = () => {
                                 </Label>
                                 <div className="form-floating mb-3">
                                     <Input
-                                        type="text"
-
+                                        type="number"
+                                        onWheel={(e) => e.target.blur()}
                                         className="p-2 h-100  form-control"
                                         name="NW"
                                         value={NW}
@@ -1073,8 +1084,8 @@ const QRMaster = () => {
                                 </Label>
                                 <div className="form-floating mb-3">
                                     <Input
-                                        type="text"
-
+                                        type="number"
+                                        onWheel={(e) => e.target.blur()}
                                         className="p-2 h-100  form-control"
                                         name="GW"
                                         value={GW}
