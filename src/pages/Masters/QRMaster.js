@@ -555,12 +555,22 @@ const QRMaster = () => {
 
                                 </button>
                             </div>
+                            <div className="remove">
+                                <button
+                                    className="btn btn-sm btn-danger remove-item-btn"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#deleteRecordModal"
+                                    onClick={() => tog_delete(row._id)}
+                                >
+                                    Remove
+                                </button>
+                            </div>
                         </div>
                     </React.Fragment>
                 );
             },
             sortable: false,
-            minWidth: "180px",
+            minWidth: "220px",
         },
     ];
 
