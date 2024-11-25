@@ -56,7 +56,6 @@ const ProductMaster = () => {
     const [Adminuser, setAdminuser] = useState([]);
 
     useEffect(() => {
-        console.log(formErrors);
         if (Object.keys(formErrors).length === 0 && isSubmit) {
             console.log("no errors");
         }
@@ -123,7 +122,6 @@ const ProductMaster = () => {
         if (Object.keys(errors).length === 0) {
             createProductMaster(values)
                 .then((res) => {
-                    console.log("res", res);
                     if (res.isOk) {
                         setmodal_list(!modal_list);
                         setValues(initialState);
@@ -279,7 +277,6 @@ const ProductMaster = () => {
                 } else if (response.length === 0) {
                     setAdminuser([]);
                 }
-                // console.log(res);
             });
 
         setLoading(false);

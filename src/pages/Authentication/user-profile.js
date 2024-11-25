@@ -90,7 +90,6 @@ const UserProfile = () => {
         try{
           
         const res = await axios.get( `${process.env.REACT_APP_API_URL}/api/auth/get/CompanyMaster/${id}`)
-        console.log(res)
         if(res)
         {
           setemail(res.email)

@@ -9,7 +9,6 @@ export const QRData = () => {
 
     const { id } = useParams()
     useEffect(() => {
-        console.log(id)
         fetchData()
     }, [id])
     const [data, setData] = useState([])
@@ -20,7 +19,6 @@ export const QRData = () => {
         try {
             setIsloading(true)
             const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/auth/get/QRMaster/${id}`)
-            console.log(res)
             if (res.isOk) {
                 setData(res.find)
                 setIsloading(false)

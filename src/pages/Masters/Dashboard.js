@@ -20,7 +20,6 @@ export const Dashboard = () => {
         try {
             const Company = await axios.get(`${process.env.REACT_APP_API_URL}/api/auth/list/CompanyMaster`);
             if (Company) setCompanyCount(Company.length);
-            console.log(Company.length)
 
             const product = await axios.get(`${process.env.REACT_APP_API_URL}/api/auth/list/ProductMaster`);
             if (product) setProductCount(product.length);

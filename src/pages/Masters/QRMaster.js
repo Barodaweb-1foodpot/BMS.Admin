@@ -78,7 +78,6 @@ const QRMaster = () => {
     const [Adminuser, setAdminuser] = useState([]);
 
     useEffect(() => {
-        console.log(formErrors);
         if (Object.keys(formErrors).length === 0 && isSubmit) {
             console.log("no errors");
         }
@@ -186,7 +185,6 @@ const QRMaster = () => {
         if (Object.keys(errors).length === 0) {
             createQRMaster(values)
                 .then((res) => {
-                    console.log("res", res);
                     if (res.isOk) {
                         setmodal_list(!modal_list);
                         setValues(initialState);
@@ -364,7 +362,6 @@ const QRMaster = () => {
                 } else if (response.length === 0) {
                     setAdminuser([]);
                 }
-                // console.log(res);
             });
 
         setLoading(false);
@@ -396,7 +393,6 @@ const QRMaster = () => {
 
     const downloadFile = async (url, name = "downloadedFile") => {
         const encodedUrl = encodeURI(url);
-        // console.log(encodedUrl);
 
         fetch(encodedUrl, {
             method: "GET",
@@ -429,7 +425,6 @@ const QRMaster = () => {
         setLoading2(true);
         try {
             const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/downloadfile`, { qrId: _id });
-            console.log(res)
             if (res.isOk) {
                 // const fileUrl = `${process.env.REACT_APP_API_URL}/uploads/BMI/${res.filename}`;
                 // window.open(fileUrl, "_blank");
@@ -446,7 +441,6 @@ const QRMaster = () => {
             setLoading2(false); // Moved outside the if-else to handle both success and error states
         } catch (err) {
             toast.error("Something went wrong");
-            console.log(err);
             setLoading2(false);
         }
     };
