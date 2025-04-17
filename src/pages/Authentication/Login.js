@@ -65,7 +65,7 @@ const Login = (props) => {
 
           localStorage.setItem("AdminUser", res.data._id);
 
-          window.location.replace("/dashboard");
+          window.location.replace("/admin/dashboard");
         } else {
           toast.error("Authentication failed!");
         }
